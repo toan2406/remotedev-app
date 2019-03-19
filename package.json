@@ -1,6 +1,6 @@
 {
   "name": "remotedev-app",
-  "version": "0.10.12",
+  "version": "0.11.0",
   "description": "Remote Redux DevTools web, electron and chrome app.",
   "scripts": {
     "start": "gulp",
@@ -19,7 +19,10 @@
     "test": "NODE_ENV=test jest --no-cache"
   },
   "main": "lib/index.js",
-  "files": ["lib", "dist"],
+  "files": [
+    "lib",
+    "dist"
+  ],
   "jest": {
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
@@ -30,7 +33,11 @@
     "url": "https://github.com/zalmoxisus/remotedev-app"
   },
   "homepage": "https://github.com/zalmoxisus/remotedev-app",
-  "keywords": ["react", "redux", "devtools"],
+  "keywords": [
+    "react",
+    "redux",
+    "devtools"
+  ],
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "devDependencies": {

@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Tabs } from 'remotedev-monitor-components';
-import StateTree from 'remotedev-inspector-monitor/lib/tabs/StateTab';
 import ActionTree from 'remotedev-inspector-monitor/lib/tabs/ActionTab';
 import DiffTree from 'remotedev-inspector-monitor/lib/tabs/DiffTab';
+import EnhancedStateTree from './StateTree';
 import { selectMonitorTab } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';
@@ -41,13 +41,13 @@ class SubTabs extends Component {
         {
           name: 'Tree',
           component: DiffTree,
-          selector: () => this.props
+          selector: () => this.props,
         },
         {
           name: 'Raw',
           component: VisualDiffTab,
-          selector: this.selector
-        }
+          selector: this.selector,
+        },
       ];
       return;
     }
@@ -55,25 +55,26 @@ class SubTabs extends Component {
     this.tabs = [
       {
         name: 'Tree',
-        component: parentTab === 'Action' ? ActionTree : StateTree,
-        selector: () => this.props
+        component: parentTab === 'Action' ? ActionTree : EnhancedStateTree,
+        selector: () => this.props,
       },
       {
         name: 'Chart',
         component: ChartTab,
-        selector: this.selector
+        selector: this.selector,
       },
       {
         name: 'Raw',
         component: RawTab,
-        selector: this.selector
-      }
+        selector: this.selector,
+      },
     ];
   }
 
   render() {
     let selected = this.props.selected;
-    if (selected === 'Chart' && this.props.parentTab === 'Diff') selected = 'Tree';
+    if (selected === 'Chart' && this.props.parentTab === 'Diff')
+      selected = 'Tree';
 
     return (
       <Tabs
@@ -91,20 +92,23 @@ SubTabs.propTypes = {
   selectMonitorTab: PropTypes.func.isRequired,
   action: PropTypes.object,
   delta: PropTypes.object,
-  nextState: PropTypes.object
+  nextState: PropTypes.object,
 };
 
 function mapStateToProps(state) {
   return {
     parentTab: state.monitor.monitorState.tabName,
-    selected: state.monitor.monitorState.subTabName
+    selected: state.monitor.monitorState.subTabName,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMonitorTab: bindActionCreators(selectMonitorTab, dispatch)
+    selectMonitorTab: bindActionCreators(selectMonitorTab, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubTabs);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SubTabs);

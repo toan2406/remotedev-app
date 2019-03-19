@@ -4,5 +4,3 @@ npm-debug.log
 .idea/
 build/
 dev/
-lib
-dist

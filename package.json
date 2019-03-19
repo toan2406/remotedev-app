@@ -14,15 +14,12 @@
     "compress:app": "npm run build:app && gulp compress:app",
     "clean": "rimraf build/ && rimraf dev/",
     "build": "rimraf ./lib && babel ./src/app --out-dir lib",
-    "prepublish": "eslint ./src/app && npm run build && npm run build:umd && npm run build:umd:min",
+    "prepublish": "npm run build && npm run build:umd && npm run build:umd:min",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --no-cache"
   },
   "main": "lib/index.js",
-  "files": [
-    "lib",
-    "dist"
-  ],
+  "files": ["lib", "dist"],
   "jest": {
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
@@ -33,11 +30,7 @@
     "url": "https://github.com/zalmoxisus/remotedev-app"
   },
   "homepage": "https://github.com/zalmoxisus/remotedev-app",
-  "keywords": [
-    "react",
-    "redux",
-    "devtools"
-  ],
+  "keywords": ["react", "redux", "devtools"],
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "devDependencies": {

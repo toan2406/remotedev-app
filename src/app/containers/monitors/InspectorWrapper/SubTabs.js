@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Tabs } from 'remotedev-monitor-components';
-import ActionTree from 'remotedev-inspector-monitor/lib/tabs/ActionTab';
 import DiffTree from 'remotedev-inspector-monitor/lib/tabs/DiffTab';
 import EnhancedStateTree from './StateTree';
+import EnhancedActionTree from './ActionTree';
 import { selectMonitorTab } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';
@@ -55,7 +55,8 @@ class SubTabs extends Component {
     this.tabs = [
       {
         name: 'Tree',
-        component: parentTab === 'Action' ? ActionTree : EnhancedStateTree,
+        component:
+          parentTab === 'Action' ? EnhancedActionTree : EnhancedStateTree,
         selector: () => this.props,
       },
       {

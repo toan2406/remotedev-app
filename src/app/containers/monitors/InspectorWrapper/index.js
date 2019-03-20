@@ -4,29 +4,49 @@ import StackTraceTab from 'redux-devtools-trace-monitor';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
 import SubTabs from './SubTabs';
 import TestTab from './TestTab';
+import apiCallDebugTransform from '../../../utils/apiCallDebugTransform';
 
-const DEFAULT_TABS = [{
-  name: 'Action',
-  component: SubTabs
-}, {
-  name: 'State',
-  component: SubTabs
-}, {
-  name: 'Diff',
-  component: SubTabs
-}];
+const DEFAULT_TABS = [
+  {
+    name: 'Action',
+    component: SubTabs,
+  },
+  {
+    name: 'State',
+    component: SubTabs,
+  },
+  {
+    name: 'Diff',
+    component: SubTabs,
+  },
+];
 
 class InspectorWrapper extends Component {
   static update = InspectorMonitor.update;
 
   render() {
-    const { lib, ...rest } = this.props;
+    const { lib, actionsById, ...rest } = this.props;
     let tabs;
     if (lib === 'redux') {
-      tabs = () => [...DEFAULT_TABS, { name: 'Trace', component: StackTraceTab }, { name: 'Test', component: TestTab }];
+      tabs = () => [
+        ...DEFAULT_TABS,
+        { name: 'Trace', component: StackTraceTab },
+        { name: 'Test', component: TestTab },
+      ];
     } else {
       tabs = () => DEFAULT_TABS;
     }
+
+    const previewActions = Object.keys(actionsById).reduce(
+      (actions, id) => ({
+        ...actions,
+        [id]: {
+          ...actionsById[id],
+          action: apiCallDebugTransform(actionsById[id].action),
+        },
+      }),
+      {},
+    );
 
     return (
       <InspectorMonitor
@@ -36,13 +56,14 @@ class InspectorWrapper extends Component {
         theme="nicinabox"
         tabs={tabs}
         {...rest}
+        actionsById={previewActions}
       />
     );
   }
 }
 
 InspectorWrapper.propTypes = {
-  lib: PropTypes.string
+  lib: PropTypes.string,
 };
 
 export default InspectorWrapper;

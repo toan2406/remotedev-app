@@ -10,7 +10,7 @@ export default function bfs(object, target) {
     const lastStep = last(path);
     const [stepName, stepValue] = lastStep;
 
-    if (stepName.toLowerCase() === target.toLowerCase())
+    if (stepName.toLowerCase().startsWith(target.toLowerCase()))
       return path.map(step => step[0]);
 
     if (isObject(stepValue) || isArray(stepValue)) {

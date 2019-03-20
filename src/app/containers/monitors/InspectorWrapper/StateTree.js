@@ -10,7 +10,9 @@ class EnhancedStateTree extends Component {
 
   resetState = () => this.setState({ searchValue: '', error: '' });
 
-  onSearch = () => {
+  onSearch = e => {
+    e.preventDefault();
+
     const {
       nextState,
       updateMonitorState,
@@ -50,7 +52,7 @@ class EnhancedStateTree extends Component {
 
     return (
       <div>
-        <SearchForm>
+        <SearchForm onSubmit={this.onSearch}>
           <div>
             <Input
               placeholder="Key..."
@@ -59,7 +61,7 @@ class EnhancedStateTree extends Component {
             />
             <Error>{error}</Error>
           </div>
-          <Button onClick={this.onSearch}>Search from {inspectedKey}</Button>
+          <Button type="submit">Search from {inspectedKey}</Button>
           <Button onClick={this.onReset}>Reset</Button>
         </SearchForm>
 
@@ -69,7 +71,7 @@ class EnhancedStateTree extends Component {
   }
 }
 
-const SearchForm = styled.div`
+const SearchForm = styled.form`
   display: flex;
   align-items: flex-start;
   padding: 10px;

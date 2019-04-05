@@ -5,6 +5,7 @@ import notification from './notification';
 import instances from './instances';
 import test from './test';
 import reports from './reports';
+import mock from './mock';
 
 const rootReducer = combineReducers({
   socket,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   instances,
   test,
   reports,
-  notification
+  notification,
+  mock,
 });
 
 export default rootReducer;

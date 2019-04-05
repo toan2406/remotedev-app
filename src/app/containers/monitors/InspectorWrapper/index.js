@@ -4,6 +4,7 @@ import StackTraceTab from 'redux-devtools-trace-monitor';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
 import SubTabs from './SubTabs';
 import TestTab from './TestTab';
+import MockTab from './MockTab';
 import apiCallDebugTransform from '../../../utils/apiCallDebugTransform';
 
 const DEFAULT_TABS = [
@@ -30,6 +31,7 @@ class InspectorWrapper extends Component {
     if (lib === 'redux') {
       tabs = () => [
         ...DEFAULT_TABS,
+        { name: 'Mock', component: MockTab },
         { name: 'Trace', component: StackTraceTab },
         { name: 'Test', component: TestTab },
       ];

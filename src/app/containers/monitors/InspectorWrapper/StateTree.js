@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import StateTree from 'remotedev-inspector-monitor/lib/tabs/StateTab';
+import Button from '../../../components/CommonButton';
 import bfs from '../../../utils/bfs';
 
 class EnhancedStateTree extends Component {
@@ -86,34 +87,12 @@ const Input = styled.input`
   border: solid thin rgba(190, 190, 190, 0.5);
   font-size: 12px;
   color: white;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 `;
 
 const Error = styled.small`
   color: red;
-`;
-
-const Button = styled.button`
-  max-width: 200px;
-  padding: 5px 10px;
-  margin: 0;
-  margin-right: 5px;
-  border: solid thin rgba(190, 190, 190, 0.5);
-  font-size: 12px;
-  color: white;
-  background: transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  outline: none;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  &:hover {
-    background: rgba(190, 190, 190, 0.2);
-  }
 `;
 
 const lastOr = (array, defaultValue) => {

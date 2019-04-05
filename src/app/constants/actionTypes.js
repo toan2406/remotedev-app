@@ -23,3 +23,5 @@ export const TEST_ADD = 'test/ADD';
 export const TEST_EDIT = 'test/EDIT';
 export const TEST_REMOVE = 'test/REMOVE';
 export const TEST_SELECT = 'test/SELECT';
+
+export const SUBMIT_MOCK = 'mock/SUBMIT';

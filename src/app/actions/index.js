@@ -1,7 +1,17 @@
 import {
-  LIFTED_ACTION, MONITOR_ACTION, SELECT_INSTANCE, SELECT_MONITOR, UPDATE_MONITOR_STATE, EXPORT,
-  TOGGLE_SYNC, TOGGLE_SLIDER, TOGGLE_DISPATCHER, GET_REPORT_REQUEST,
-  SHOW_NOTIFICATION, CLEAR_NOTIFICATION
+  LIFTED_ACTION,
+  MONITOR_ACTION,
+  SELECT_INSTANCE,
+  SELECT_MONITOR,
+  UPDATE_MONITOR_STATE,
+  EXPORT,
+  TOGGLE_SYNC,
+  TOGGLE_SLIDER,
+  TOGGLE_DISPATCHER,
+  GET_REPORT_REQUEST,
+  SHOW_NOTIFICATION,
+  CLEAR_NOTIFICATION,
+  SUBMIT_MOCK,
 } from '../constants/actionTypes';
 import { RECONNECT } from '../constants/socketActionTypes';
 
@@ -52,7 +62,7 @@ export function lockChanges(status) {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
     action: { type: 'LOCK_CHANGES', status },
-    toAll: true
+    toAll: true,
   };
 }
 
@@ -61,7 +71,7 @@ export function pauseRecording(status) {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
     action: { type: 'PAUSE_RECORDING', status },
-    toAll: true
+    toAll: true,
   };
 }
 
@@ -95,4 +105,8 @@ export function clearNotification() {
 
 export function getReport(report) {
   return { type: GET_REPORT_REQUEST, report };
+}
+
+export function submitMock(data) {
+  return { type: SUBMIT_MOCK, payload: data };
 }

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import JSON5 from 'json5';
-import { submitMock } from '../../../actions';
+import { liftedDispatch, submitMock } from '../../../actions';
 import Button from '../../../components/CommonButton';
 
 class MockTab extends Component {
@@ -22,6 +22,7 @@ class MockTab extends Component {
     try {
       const mockData = JSON5.parse(this.state.value);
       this.props.submitMock(mockData);
+      this.props.liftedDispatch({ type: 'APPLY_MOCK', mockData });
       this.setState({ error: '', isDirty: false });
     } catch (err) {
       this.setState({ error: 'Invalid JSON' });
@@ -82,6 +83,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    liftedDispatch: bindActionCreators(liftedDispatch, dispatch),
     submitMock: bindActionCreators(submitMock, dispatch),
   };
 }

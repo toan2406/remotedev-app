@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import JSON5 from 'json5';
 import { liftedDispatch, submitMock } from '../../../actions';
+import { DEFAULT_MOCK_DATA } from '../../../reducers/mock';
 import Button from '../../../components/CommonButton';
+import validateMockData from '../../../utils/validateMockData';
 
 class MockTab extends Component {
   constructor(props) {
@@ -21,24 +23,33 @@ class MockTab extends Component {
   handleSubmit = () => {
     try {
       const mockData = JSON5.parse(this.state.value);
+      const isValidMockData = validateMockData(mockData);
+
+      if (!isValidMockData) throw new Error();
+
       this.props.submitMock(mockData);
       this.props.liftedDispatch({ type: 'APPLY_MOCK', mockData });
       this.setState({ error: '', isDirty: false });
     } catch (err) {
-      this.setState({ error: 'Invalid JSON' });
+      this.setState({ error: 'Invalid mock data shape' });
     }
   };
 
+  handleRemove = () =>
+    this.setState(
+      { value: JSON5.stringify(DEFAULT_MOCK_DATA) },
+      this.handleSubmit,
+    );
+
   render() {
-    const { value, isDirty, error } = this.state;
+    const { value, error } = this.state;
     return (
       <Wrapper>
         <ButtonWrapper>
-          <Button onClick={this.handleSubmit} disabled={!isDirty}>
-            Apply mock
-          </Button>
-          <Error>{error}</Error>
+          <Button onClick={this.handleSubmit}>Apply mock</Button>
+          <Button onClick={this.handleRemove}>Remove mock</Button>
         </ButtonWrapper>
+        <Error>{error}</Error>
         <TextArea value={value} onChange={this.handleChange} />
       </Wrapper>
     );
@@ -69,7 +80,8 @@ const TextArea = styled.textarea`
   padding: 5px 10px;
   margin: 0;
   border: solid thin rgba(190, 190, 190, 0.5);
-  font-size: 12px;
+  font-family: monospace;
+  font-size: 13px;
   color: white;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -77,7 +89,7 @@ const TextArea = styled.textarea`
 
 function mapStateToProps(state) {
   return {
-    mockData: state.mock.data,
+    mockData: state.mock ? state.mock.data : DEFAULT_MOCK_DATA,
   };
 }
 

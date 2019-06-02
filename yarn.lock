@@ -7937,7 +7937,7 @@ regjsparser@^0.1.4:
 
 remotedev-inspector-monitor@^0.11.0:
   version "0.11.0"
-  resolved "https://registry.yarnpkg.com/remotedev-inspector-monitor/-/remotedev-inspector-monitor-0.11.0.tgz#552dbc3736e6d898a783b51cfd7d20b875620d5f"
+  resolved "https://registry.npmjs.org/remotedev-inspector-monitor/-/remotedev-inspector-monitor-0.11.0.tgz#552dbc3736e6d898a783b51cfd7d20b875620d5f"
   integrity sha1-VS28Nzbm2Jing7Uc/X0guHViDV8=
   dependencies:
     babel-runtime "^6.3.19"
